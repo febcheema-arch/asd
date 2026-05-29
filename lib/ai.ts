@@ -17,7 +17,8 @@ function parseTweets(text: string): string[] {
 
 export async function generateDraftsWithAI(
   commitGroups: { repo: string; commits: Commit[] }[],
-  provider: AIProvider = 'anthropic'
+  provider: AIProvider = 'anthropic',
+  tone: string = 'default'
 ): Promise<string[]> {
   const commitSummary = commitGroups
     .flatMap(({ repo, commits }) =>
@@ -28,11 +29,21 @@ export async function generateDraftsWithAI(
     )
     .join('\n')
 
+  let toneGuidance = "Write in a direct builder's voice. Under 280 characters. No hashtags. No emojis unless the founder uses them. Sound like a person, not a press release."
+  
+  if (tone === 'sarcastic') {
+    toneGuidance = "Write in a funny, slightly sarcastic developer voice. Roast common startup hacks or developer struggles, but show that you shipped something solid. Under 280 characters. No hashtags. No emojis."
+  } else if (tone === 'technical') {
+    toneGuidance = "Write in a highly technical, educational developer voice focusing on architectural details, code structures, and concrete facts. Sound like a helpful senior engineer. Under 280 characters. No hashtags. No emojis."
+  } else if (tone === 'hype') {
+    toneGuidance = "Write in an energetic, excited founder voice. High energy, celebratory, highlighting velocity and execution. Under 280 characters. No hashtags."
+  }
+
   const prompt = `You are a ghostwriter for a technical founder. Here are the commits they shipped this week:
 
 ${commitSummary}
 
-Write 5 ready-to-post tweets that share what they built, in a direct builder's voice. Each tweet must be under 280 characters. No hashtags. No emojis unless the founder uses them. Sound like a person, not a press release.
+${toneGuidance}
 
 Return ONLY the 5 tweets, numbered 1-5, one per line. No preamble, no explanation.`
 

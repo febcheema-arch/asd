@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
   const supabase = createServerClient()
   const { data: user, error } = await supabase
     .from('users')
-    .select('github_username, github_email, access_token')
+    .select('github_username, github_email, access_token, ai_provider, writing_tone')
     .eq('id', userId)
     .single()
 

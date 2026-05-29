@@ -8,6 +8,7 @@ interface User {
   github_email: string
   access_token: string
   ai_provider?: string
+  writing_tone?: string
 }
 
 export async function runPipeline(user: User): Promise<{
@@ -25,7 +26,8 @@ export async function runPipeline(user: User): Promise<{
     if (filtered.length === 0) return { status: 'no_commits' }
 
     const provider = (user.ai_provider || process.env.DEFAULT_AI_PROVIDER || 'anthropic') as AIProvider
-    const drafts = await generateDraftsWithAI(filtered, provider)
+    const tone = user.writing_tone || 'default'
+    const drafts = await generateDraftsWithAI(filtered, provider, tone)
     if (drafts.length === 0) return { status: 'no_drafts' }
 
     console.log('\n====================================')
