@@ -7,7 +7,7 @@ export default function Home() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
-  const supabase = createBrowserClient();
+  const supabase = createBrowserClient()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -36,202 +36,169 @@ export default function Home() {
   }
 
   return (
-    <main className="relative min-h-screen bg-[#050505] text-neutral-100 selection:bg-neutral-800 overflow-hidden flex flex-col justify-between">
-      {/* Decorative ambient background glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-violet-900/10 blur-[150px] pointer-events-none animate-pulse-glow" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-emerald-900/10 blur-[150px] pointer-events-none" />
+    <main className="min-h-screen bg-neutral-950 text-neutral-100 selection:bg-neutral-800">
+      <div className="max-w-2xl mx-auto px-6 py-24 md:py-36">
 
-      {/* Main navigation / Header */}
-      <nav className="max-w-5xl w-full mx-auto px-6 py-6 flex items-center justify-between z-10">
-        <div className="flex items-center gap-2.5">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-violet-600 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/20">
-            S
+        {/* Hero */}
+        <section className="mb-24">
+          <div className="inline-flex items-center gap-2 border border-neutral-800 rounded-full px-3 py-1 mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+            <span className="text-xs text-neutral-400 tracking-wide">Waitlist open · 50% off for first 50</span>
           </div>
-          <span className="font-bold tracking-tight text-lg bg-gradient-to-r from-white via-neutral-100 to-neutral-400 bg-clip-text text-transparent">SubKitt</span>
-        </div>
-        <a
-          href="/login"
-          className="glass border border-neutral-800 hover:border-neutral-700 text-neutral-200 text-xs font-semibold px-4.5 py-2.5 rounded-xl transition-all duration-300 active:scale-[0.98] hover:text-white"
-        >
-          Sign In
-        </a>
-      </nav>
-
-      {/* Hero Body */}
-      <div className="max-w-5xl w-full mx-auto px-6 py-12 md:py-24 z-10 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-        
-        {/* Left column: Copy & philosophy */}
-        <div className="lg:col-span-7 space-y-8">
-          <div className="inline-flex items-center gap-2 bg-neutral-900/60 border border-neutral-800/80 rounded-full px-3.5 py-1.5 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[11px] text-neutral-400 font-medium tracking-wide">Waitlist open · 50% off first 50 users</span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] bg-gradient-to-b from-white via-neutral-100 to-neutral-500 bg-clip-text text-transparent">
-            You ship. <br />
-            Your work turns <br />
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.03]">
+            You ship.<br />
+            Your work turns<br />
             into inbound.
           </h1>
-
-          <p className="text-lg md:text-xl text-neutral-400 leading-relaxed max-w-xl">
-            SubKitt drafts your week&apos;s posts directly from what you shipped — keeping you inside your codebase while your audience grows on autopilot.
+          <p className="mt-8 text-xl text-neutral-400 leading-relaxed max-w-lg">
+            SubKitt drafts your week&apos;s posts from what you shipped — so you stay in the code while your audience grows.
           </p>
+        </section>
 
-          {/* Value points */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4">
-            <div className="flex items-start gap-3">
-              <span className="text-violet-500 mt-1">✦</span>
-              <p className="text-sm text-neutral-300 leading-relaxed">
-                <strong className="text-neutral-200">Zero writing templates:</strong> Drafts modeled directly from actual code commits.
-              </p>
-            </div>
-            <div className="flex items-start gap-3">
-              <span className="text-emerald-500 mt-1">✦</span>
-              <p className="text-sm text-neutral-300 leading-relaxed">
-                <strong className="text-neutral-200">Set it and forget it:</strong> Every Monday, high-impact tweets land in your inbox.
-              </p>
-            </div>
-          </div>
-        </div>
+        {/* Who it's for */}
+        <section className="mb-24">
+          <span className="text-xs uppercase tracking-widest text-neutral-600 font-medium">Who it&apos;s for</span>
+          <p className="mt-4 text-xl leading-relaxed text-neutral-300 border-l-2 border-neutral-800 pl-5">
+            Solo technical founders building SaaS. You ship often but your Twitter timeline is a ghost town. You know building in public is the cheat code for growth, but you&apos;d rather stay in the codebase. SubKitt is built for you.
+          </p>
+        </section>
 
-        {/* Right column: Form & Interactive Preview */}
-        <div className="lg:col-span-5 space-y-6">
-          
-          {/* Main Action Box */}
-          <div className="glass border border-neutral-800/80 rounded-3xl p-8 shadow-2xl shadow-black/80 space-y-6 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-[120px] h-[120px] rounded-full bg-violet-600/5 blur-[50px] pointer-events-none" />
-            
-            <div>
-              <h2 className="text-xl font-bold tracking-tight text-neutral-100">Stop building in silence.</h2>
-              <p className="text-xs text-neutral-400 mt-1.5 leading-relaxed">
-                Create an account to connect your repositories, select your AI model, and preview drafts immediately.
-              </p>
-            </div>
-
-            <a
-              href="/login"
-              className="flex items-center justify-center gap-2 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold py-3.5 px-6 rounded-2xl transition-all duration-300 shadow-lg shadow-violet-900/30 active:scale-[0.98] text-sm text-center"
-            >
-              Get Started (Sign In / Sign Up) &rarr;
-            </a>
-
-            <div className="relative flex py-2 items-center">
-              <div className="flex-grow border-t border-neutral-800/60"></div>
-              <span className="flex-shrink mx-4 text-xs font-mono text-neutral-600 uppercase tracking-widest">or</span>
-              <div className="flex-grow border-t border-neutral-800/60"></div>
-            </div>
-
-            <div className="space-y-4">
-              <p className="text-xs text-neutral-400 font-medium">Join waitlist for feature updates:</p>
-              
-              {status === 'success' ? (
-                <div className="bg-emerald-950/20 border border-emerald-900/60 rounded-xl p-4 text-emerald-400 text-xs flex items-start gap-2.5 animate-fadeIn">
-                  <span className="text-sm mt-0.5">✓</span>
-                  <p className="leading-relaxed">You&apos;re in! We will notify you when SubKitt is ready for your account.</p>
+        {/* How it works */}
+        <section className="mb-24">
+          <span className="text-xs uppercase tracking-widest text-neutral-600 font-medium">How it works</span>
+          <div className="mt-6 space-y-3">
+            {[
+              { n: '01', title: 'Sign up and Connect GitHub.', body: 'Create an account and connect GitHub from your dashboard. SubKitt watches what you ship — features, fixes, releases.' },
+              { n: '02', title: 'Your Monday morning, done.', body: 'Every Monday, SubKitt drops 5 ready-to-post drafts in your inbox. No prompts. No blank page. Just your work, packaged.' },
+              { n: '03', title: 'See what\'s landing.', body: 'Every batch flags last week\'s best-performing post — and tells you which pattern this week\'s drafts are leaning toward.' },
+            ].map(({ n, title, body }) => (
+              <div key={n} className="flex gap-5 p-5 rounded-xl border border-neutral-800/60 bg-neutral-900/40">
+                <span className="text-xs font-mono text-neutral-600 mt-0.5 shrink-0 w-6">{n}</span>
+                <div>
+                  <h3 className="font-semibold text-neutral-100 mb-1">{title}</h3>
+                  <p className="text-neutral-400 leading-relaxed text-sm">{body}</p>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-2.5">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@example.com"
-                    required
-                    disabled={status === 'loading'}
-                    className="w-full bg-neutral-950/60 border border-neutral-800 rounded-xl px-4 py-3 text-neutral-200 placeholder:text-neutral-600 focus:outline-none focus:border-neutral-700 disabled:opacity-50 text-xs transition-colors duration-300"
-                  />
-                  <button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className="w-full bg-neutral-900 border border-neutral-800 text-neutral-200 hover:bg-neutral-800 hover:text-white font-semibold py-3 px-5 rounded-xl transition disabled:opacity-50 text-xs whitespace-nowrap active:scale-[0.99]"
-                  >
-                    {status === 'loading' ? 'Joining...' : 'Join Waitlist'}
-                  </button>
-                </form>
-              )}
+              </div>
+            ))}
+          </div>
+        </section>
 
-              {status === 'error' && (
-                <p className="text-red-400 text-xs mt-2">Something went wrong: {errorMsg}</p>
-              )}
+        {/* Proof section */}
+        <section className="mb-24">
+          <span className="text-xs uppercase tracking-widest text-neutral-600 font-medium">What this looks like</span>
+          <div className="mt-6 rounded-xl border border-neutral-800 overflow-hidden">
+            <div className="bg-neutral-900/60 px-5 py-4 border-b border-neutral-800">
+              <span className="text-xs uppercase tracking-wider text-neutral-500 font-medium">Input — commit message</span>
+            </div>
+            <div className="px-5 py-4">
+              <code className="text-sm text-green-400 font-mono">
+                feat: add OAuth flow to settings page
+              </code>
+            </div>
+            <div className="flex items-center gap-3 px-5 py-2 border-y border-neutral-800/60">
+              <div className="flex-1 h-px bg-neutral-800" />
+              <span className="text-neutral-700 text-xs">SubKitt</span>
+              <div className="flex-1 h-px bg-neutral-800" />
+            </div>
+            <div className="bg-neutral-900/60 px-5 py-4 border-b border-neutral-800">
+              <span className="text-xs uppercase tracking-wider text-neutral-500 font-medium">Output — Monday draft</span>
+            </div>
+            <div className="px-5 py-4">
+              <p className="text-sm text-neutral-200 leading-relaxed">
+                Just shipped OAuth into SubKitt. If you&apos;ve ever spent a Tuesday fighting GitHub&apos;s token refresh flow, this one&apos;s for you.
+              </p>
             </div>
           </div>
+          <p className="text-sm text-neutral-600 mt-3">One commit, one draft. That&apos;s the whole loop.</p>
+        </section>
 
-          {/* Interactive Commit -> Post Visualization */}
-          <div className="glass border border-neutral-900 rounded-2xl p-5 space-y-4 shadow-xl">
-            <div className="flex items-center justify-between border-b border-neutral-900 pb-3">
-              <span className="text-[10px] uppercase font-mono tracking-widest text-neutral-500">Live Sample Loop</span>
-              <span className="text-[10px] font-mono text-emerald-500 font-bold bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-900/40">Active</span>
-            </div>
-            
+        {/* Philosophy */}
+        <section className="mb-24 space-y-5">
+          <p className="text-xl md:text-2xl text-neutral-200 leading-relaxed font-medium">
+            Technical founders ship more than they post. The work is there — the audience isn&apos;t, because turning code into content is a second job nobody has time for.
+          </p>
+          <p className="text-lg text-neutral-400 leading-relaxed">
+            You tried to become a creator and it killed your velocity. That&apos;s because you aren&apos;t a creator — you&apos;re a builder.
+          </p>
+          <p className="text-xl md:text-2xl font-semibold text-neutral-100 leading-relaxed">
+            Stay in the code. SubKitt handles the distribution.
+          </p>
+        </section>
+
+        {/* CTA */}
+        <section className="mb-24 rounded-2xl border border-neutral-800 bg-neutral-900/40 px-8 py-10">
+          <h2 className="text-3xl md:text-4xl font-bold mb-2 tracking-tight">Stop building in silence.</h2>
+          <p className="text-neutral-400 mb-8">Sign in or create an account to connect your GitHub and get drafts.</p>
+
+          <a
+            href="/login"
+            className="inline-flex items-center gap-3 bg-neutral-100 hover:bg-white text-neutral-950 font-bold px-7 py-3.5 rounded-xl transition text-sm shadow-lg shadow-white/5 active:scale-[0.98]"
+          >
+            Get Started (Sign In / Sign Up) &rarr;
+          </a>
+
+          <div className="mt-8 pt-8 border-t border-neutral-800/60">
+            <p className="text-sm text-neutral-500 mb-4">Not ready yet? Join the waitlist instead.</p>
+
+            {status === 'success' ? (
+              <div className="bg-green-950/40 border border-green-900 rounded-xl p-5 text-green-300 flex items-center gap-3">
+                <span className="text-lg">✓</span>
+                You&apos;re on the list. One email when SubKitt is ready for you.
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  required
+                  disabled={status === 'loading'}
+                  className="flex-1 bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-3.5 text-neutral-100 placeholder:text-neutral-600 focus:outline-none focus:border-neutral-600 disabled:opacity-50 text-sm"
+                />
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="bg-neutral-900 border border-neutral-700 text-neutral-300 font-semibold px-7 py-3.5 rounded-xl hover:bg-neutral-800 transition disabled:opacity-50 text-sm whitespace-nowrap"
+                >
+                  {status === 'loading' ? 'Joining...' : 'Join waitlist →'}
+                </button>
+              </form>
+            )}
+
+            {status === 'error' && (
+              <p className="text-red-400 text-sm mt-3">Something went wrong: {errorMsg}</p>
+            )}
+          </div>
+
+          <p className="text-xs text-neutral-600 mt-5">No spam. Unsubscribe anytime.</p>
+        </section>
+
+        {/* Founder note */}
+        <section className="pt-10 border-t border-neutral-900">
+          <span className="text-xs uppercase tracking-widest text-neutral-600 font-medium">Building in public</span>
+          <div className="mt-5 flex gap-4 items-start">
+            <div className="w-9 h-9 rounded-full bg-neutral-800 border border-neutral-700 shrink-0 flex items-center justify-center text-sm font-semibold text-neutral-400">H</div>
             <div className="space-y-3">
-              <div className="space-y-1">
-                <span className="text-[9px] uppercase font-mono tracking-wider text-neutral-600">Your Commit</span>
-                <div className="bg-neutral-950/80 border border-neutral-800/40 rounded-xl p-3">
-                  <code className="text-xs text-neutral-300 font-mono flex items-center gap-1.5">
-                    <span className="text-violet-500 font-bold">git commit -m</span> &quot;feat: add OAuth flow to settings page&quot;
-                  </code>
-                </div>
-              </div>
-              
-              <div className="flex justify-center py-1">
-                <div className="w-0.5 h-6 bg-gradient-to-b from-violet-600 to-indigo-600" />
-              </div>
-
-              <div className="space-y-1">
-                <span className="text-[9px] uppercase font-mono tracking-wider text-neutral-600">SubKitt X Draft</span>
-                <div className="bg-neutral-950/80 border border-neutral-800/40 rounded-xl p-4">
-                  <p className="text-xs text-neutral-200 leading-relaxed font-sans">
-                    Just shipped OAuth into SubKitt. If you&apos;ve ever spent a Tuesday fighting GitHub&apos;s token refresh flow, this one&apos;s for you. ⚡
-                  </p>
-                </div>
+              <p className="text-neutral-300 leading-relaxed">
+                I&apos;m Hassan. Solo, technical, broke student, Day 8.
+              </p>
+              <p className="text-neutral-400 leading-relaxed text-sm">
+                I got tired of shipping code nobody saw. I refused to waste my build time on &ldquo;Twitter growth hacks.&rdquo; So I&apos;m building the tool I needed.
+              </p>
+              <div className="flex flex-col gap-1 pt-2">
+                <a href="https://x.com/CheemaEdu" target="_blank" rel="noopener noreferrer" className="text-sm text-neutral-500 hover:text-neutral-200 transition">
+                  → @CheemaEdu on X
+                </a>
+                <a href="https://github.com/Hassan-Cheema/subkitt" target="_blank" rel="noopener noreferrer" className="text-sm text-neutral-500 hover:text-neutral-200 transition">
+                  → github.com/Hassan-Cheema/subkitt
+                </a>
               </div>
             </div>
           </div>
+        </section>
 
-        </div>
       </div>
-
-      {/* Philosophy & Timeline section */}
-      <div className="max-w-5xl w-full mx-auto px-6 py-12 md:py-16 z-10 border-t border-neutral-900">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { n: '01', title: 'Connect GitHub', body: 'Link repositories from your secure dashboard. SubKitt parses commits, filtering logs to isolate features.' },
-            { n: '02', title: 'Select AI & Style', body: 'Input your Gemini, OpenAI, or Claude key. Customize your writing voice—from senior dev to sarcastic shipper.' },
-            { n: '03', title: 'Monday Morning Delivery', body: '5 ready-to-post drafts land in your inbox. Copy, refine, and release to keep building in public.' },
-          ].map(({ n, title, body }) => (
-            <div key={n} className="space-y-2">
-              <div className="text-xs font-mono text-neutral-600">{n}</div>
-              <h3 className="font-bold text-neutral-200 text-sm">{title}</h3>
-              <p className="text-xs text-neutral-400 leading-relaxed">{body}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Footer / Founder note */}
-      <footer className="max-w-5xl w-full mx-auto px-6 py-8 z-10 border-t border-neutral-900/60 flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div className="flex gap-4 items-start max-w-lg">
-          <div className="w-8 h-8 rounded-full bg-neutral-900 border border-neutral-800 shrink-0 flex items-center justify-center text-xs font-bold text-neutral-400">H</div>
-          <div className="space-y-1">
-            <p className="text-xs text-neutral-300">
-              Built by <strong className="text-neutral-200">Hassan</strong> · Solo builder shipping in public
-            </p>
-            <p className="text-[11px] text-neutral-500 leading-relaxed">
-              I got tired of shipping features that went unseen. So I built this pipeline to automate content generation directly from my commit history.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-4 text-xs font-mono text-neutral-500 shrink-0">
-          <a href="https://x.com/CheemaEdu" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-300 transition-colors">
-            X (Twitter)
-          </a>
-          <span>·</span>
-          <a href="https://github.com/Hassan-Cheema/subkitt" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-300 transition-colors">
-            GitHub
-          </a>
-        </div>
-      </footer>
     </main>
   );
 }
