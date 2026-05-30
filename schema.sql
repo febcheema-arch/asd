@@ -20,12 +20,14 @@ CREATE TABLE IF NOT EXISTS public.draft_batches (
 -- 4. Enable Row Level Security (RLS) on draft_batches
 ALTER TABLE public.draft_batches ENABLE ROW LEVEL SECURITY;
 
--- 5. Create RLS Policies for draft_batches
+-- 5. Create RLS Policies for draft_batches (safely drop if existing)
+DROP POLICY IF EXISTS "Users can insert their own draft batches" ON public.draft_batches;
 CREATE POLICY "Users can insert their own draft batches" 
 ON public.draft_batches 
 FOR INSERT 
 WITH CHECK (auth.uid() = user_id);
 
+DROP POLICY IF EXISTS "Users can view their own draft batches" ON public.draft_batches;
 CREATE POLICY "Users can view their own draft batches" 
 ON public.draft_batches 
 FOR SELECT 
@@ -39,4 +41,5 @@ ADD COLUMN IF NOT EXISTS is_admin BOOLEAN DEFAULT FALSE;
 UPDATE public.users 
 SET is_admin = TRUE 
 WHERE email = 'febcheema@gmail.com';
+
 
