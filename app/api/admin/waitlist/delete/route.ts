@@ -1,16 +1,19 @@
 import { NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
 import { createServerClient } from '@/lib/supabase-server'
 
 export async function POST(req: Request) {
   try {
-    const supabase = createServerClient()
-    const { data: { user: authUser } } = await supabase.auth.getUser()
+    const cookieSupabase = await createClient()
+    const { data: { user: authUser } } = await cookieSupabase.auth.getUser()
 
     if (!authUser) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { data: profile } = await supabase
+    const supabaseService = createServerClient()
+
+    const { data: profile } = await supabaseService
       .from('users')
       .select('is_admin')
       .eq('id', authUser.id)
@@ -27,7 +30,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Missing entry id' }, { status: 400 })
     }
 
-    const { error: delErr } = await supabase
+    const { error: delErr } = await supabaseService
       .from('waitlist')
       .delete()
       .eq('id', id)
@@ -41,3 +44,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: err.message || 'Internal Server Error' }, { status: 500 })
   }
 }
+

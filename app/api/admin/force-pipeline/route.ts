@@ -1,18 +1,21 @@
 import { NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
 import { createServerClient } from '@/lib/supabase-server'
 import { runPipeline } from '@/lib/pipeline'
 
 export async function POST(req: Request) {
   try {
-    const supabase = createServerClient()
-    const { data: { user: authUser }, error: authErr } = await supabase.auth.getUser()
+    const cookieSupabase = await createClient()
+    const { data: { user: authUser }, error: authErr } = await cookieSupabase.auth.getUser()
 
     if (authErr || !authUser) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Double-check admin privileges in DB
-    const { data: profile } = await supabase
+    const supabaseService = createServerClient()
+
+    // Double-check admin privileges in DB using service role client
+    const { data: profile } = await supabaseService
       .from('users')
       .select('is_admin, email')
       .eq('id', authUser.id)
@@ -31,7 +34,7 @@ export async function POST(req: Request) {
     }
 
     // Fetch target user settings and tokens
-    const { data: targetUser, error: fetchErr } = await supabase
+    const { data: targetUser, error: fetchErr } = await supabaseService
       .from('users')
       .select('id, github_username, github_email, access_token, ai_provider, writing_tone, gemini_api_key, openai_api_key, anthropic_api_key')
       .eq('id', userId)
@@ -54,3 +57,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: err.message || 'Internal Server Error' }, { status: 500 })
   }
 }
+
