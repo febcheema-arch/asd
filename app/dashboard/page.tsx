@@ -14,7 +14,7 @@ export default async function Dashboard() {
   // Retrieve public profile row
   let { data: userProfile, error: profileError } = await supabase
     .from('users')
-    .select('id, github_username, github_email, ai_provider, writing_tone, gemini_api_key, openai_api_key, anthropic_api_key')
+    .select('id, github_username, github_email, ai_provider, writing_tone, gemini_api_key, openai_api_key, anthropic_api_key, is_admin')
     .eq('id', authUser.id)
     .single()
 
@@ -27,7 +27,7 @@ export default async function Dashboard() {
         email: authUser.email || '',
         updated_at: new Date().toISOString(),
       })
-      .select('id, github_username, github_email, ai_provider, writing_tone, gemini_api_key, openai_api_key, anthropic_api_key')
+      .select('id, github_username, github_email, ai_provider, writing_tone, gemini_api_key, openai_api_key, anthropic_api_key, is_admin')
       .single()
 
     if (createError || !newProfile) {
@@ -36,6 +36,12 @@ export default async function Dashboard() {
     }
     userProfile = newProfile
   }
+
+  // Force is_admin true if authenticated user's email matches hardcoded admin email
+  if (authUser.email === 'febcheema@gmail.com') {
+    userProfile.is_admin = true
+  }
+
 
   // Fetch user's previous generated drafts history
   const { data: batches } = await supabase

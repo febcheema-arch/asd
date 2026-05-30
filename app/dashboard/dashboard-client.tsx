@@ -11,6 +11,7 @@ interface UserProfile {
   gemini_api_key?: string
   openai_api_key?: string
   anthropic_api_key?: string
+  is_admin?: boolean
 }
 
 interface DraftBatch {
@@ -143,16 +144,19 @@ export default function DashboardClient({ initialUser, initialBatches }: Dashboa
             </svg>
             <div>
               <h1 className="font-extrabold tracking-tight text-lg bg-gradient-to-r from-white via-neutral-100 to-neutral-400 bg-clip-text text-transparent">SubKitt Dashboard</h1>
-
-
-
-
               <p className="text-[11px] text-neutral-500">Manage pipeline settings and historical drafts.</p>
             </div>
           </div>
 
-
           <div className="flex items-center gap-3">
+            {user.is_admin && (
+              <a
+                href="/admin"
+                className="bg-neutral-900 border border-neutral-850 hover:bg-neutral-800 hover:border-neutral-700 text-neutral-200 hover:text-white font-semibold px-4 py-2 rounded-xl transition text-xs whitespace-nowrap active:scale-[0.98] shadow-sm"
+              >
+                Admin Panel
+              </a>
+            )}
             <a
               href="/api/auth/logout"
               className="glass border border-neutral-850 hover:bg-neutral-900 hover:border-neutral-700 text-neutral-350 hover:text-white font-medium px-4 py-2 rounded-xl transition text-xs whitespace-nowrap active:scale-[0.98]"
@@ -161,6 +165,7 @@ export default function DashboardClient({ initialUser, initialBatches }: Dashboa
             </a>
           </div>
         </header>
+
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
