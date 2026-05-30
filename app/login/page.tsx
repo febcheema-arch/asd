@@ -84,9 +84,10 @@ export default function AuthPage() {
 
           {/* Heading */}
           <div className="mb-8 space-y-4">
-            <img src="/subkitt_icon.png" alt="SubKitt Logo" className="w-8 h-8 rounded-lg border border-neutral-900 shadow-md" />
+            <img src="/subkitt_icon.png" alt="SubKitt Logo" className="w-8 h-8 rounded-lg border border-neutral-900 shadow-md invert" />
             <div>
               <h1 className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">
+
                 {mode === 'login' ? 'Welcome back' : 'Create your account'}
               </h1>
 

@@ -135,9 +135,10 @@ export default function DashboardClient({ initialUser, initialBatches }: Dashboa
         {/* Navigation & Brand */}
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-neutral-900 pb-6">
           <div className="flex items-center gap-2.5">
-            <img src="/subkitt_icon.png" alt="SubKitt Logo" className="w-8 h-8 rounded-lg border border-neutral-900 shadow-md" />
+            <img src="/subkitt_icon.png" alt="SubKitt Logo" className="w-8 h-8 rounded-lg border border-neutral-900 shadow-md invert" />
             <div>
               <h1 className="font-extrabold tracking-tight text-lg bg-gradient-to-r from-white via-neutral-100 to-neutral-400 bg-clip-text text-transparent">SubKitt Dashboard</h1>
+
 
 
               <p className="text-[11px] text-neutral-500">Manage pipeline settings and historical drafts.</p>
